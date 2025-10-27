@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "target": "ESNext",
+    "isolatedModules": true,
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*", "types/**/*", "vite.config.ts"]
+}

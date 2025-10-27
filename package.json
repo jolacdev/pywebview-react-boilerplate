@@ -1,0 +1,48 @@
+{
+  "name": "pywebview-react",
+  "version": "1.0.0",
+  "description": "PyWebView with React",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm clean && pnpm frontend:prod && run-script-os",
+    "build:macos": "./venv-pywebview/bin/python build-macos.py py2app",
+    "build:windows": ".\\venv-pywebview\\Scripts\\pyinstaller build-windows.spec",
+    "build:linux": "pyinstaller build-linux.spec",
+    "clean": "run-script-os",
+    "clean:default": "rm -rf dist 2>/dev/null; rm -rf gui 2>/dev/null; rm -rf build 2>/dev/null; ",
+    "clean:windows": "if exist dist rd /S /Q dist & if exist build rd /S /Q build & if exist gui rd /S /Q gui",
+    "dev": "vite",
+    "frontend:dev": "vite build --outDir gui --emptyOutDir",
+    "frontend:prod": "vite build --outDir gui --emptyOutDir --minify",
+    "frontend:preview": "vite preview --outDir gui --emptyOutDir",
+    "init": "pnpm i && run-script-os",
+    "init:windows": "python -m venv venv-pywebview && .\\venv-pywebview\\Scripts\\pip install -r requirements.txt",
+    "init:linux": "python3 -m venv venv-pywebview && if [[ -z \"${KDE_FULL_SESSION}\" ]]; then pnpm init:qt5; else pnpm init:gtk; fi",
+    "init:default": "python3 -m venv venv-pywebview && ./venv-pywebview/bin/pip install -r requirements.txt",
+    "init:qt5": "./venv-pywebview/bin/pip install pyqt5 pyqtwebengine -r requirements.txt",
+    "init:gtk": "sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 && ./venv-pywebview/bin/pip install pycairo pygobject -r requirements.txt",
+    "start": "pnpm frontend:dev && run-script-os",
+    "start:windows": ".\\venv-pywebview\\Scripts\\python src\\index.py",
+    "start:default": "python src/index.py"
+  },
+  "keywords": [
+    "pywebview",
+    "python",
+    "javascript",
+    "react",
+    "vite"
+  ],
+  "author": "Jose L",
+  "dependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "5.0.0",
+    "run-script-os": "1.1.6",
+    "typescript": "5.9.2",
+    "vite": "7.1.7",
+    "vite-tsconfig-paths": "5.1.4"
+  }
+}
